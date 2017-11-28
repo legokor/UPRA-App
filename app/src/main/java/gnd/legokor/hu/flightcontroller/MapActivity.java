@@ -10,7 +10,6 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 
 import java.util.concurrent.TimeUnit;
@@ -58,11 +57,10 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         map = googleMap;
-        LatLng sydney = new LatLng(47.4734, 19.0598);
-        map.addMarker(new MarkerOptions().position(sydney)
-                .title("Marker in Sydney"));
-        map.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-        map.moveCamera(CameraUpdateFactory.zoomTo(15));
+        map.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+        LatLng initialPosition = new LatLng(47.4734, 19.0598);
+        map.moveCamera(CameraUpdateFactory.newLatLng(initialPosition));
+        map.moveCamera(CameraUpdateFactory.zoomTo(17));
     }
 
     @Override
@@ -70,12 +68,12 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                line = line.add(new LatLng(coordinates.latitude, coordinates.longitude));
-                for (LatLng point : line.getPoints()) {
-                    Log.i("POINT", point.toString());
-                }
+                Log.i("COORD", coordinates.toString());
+                LatLng latLng = new LatLng(coordinates.lat, coordinates.lng);
+                // TODO: remove previous line
+                line = line.add(latLng);
                 map.addPolyline(line);
-                Log.i("MAIN", "Adding coordinates^");
+                map.moveCamera(CameraUpdateFactory.newLatLng(latLng));
             }
         });
     }
