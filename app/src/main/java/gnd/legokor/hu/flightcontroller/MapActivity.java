@@ -16,6 +16,8 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 
 import java.util.concurrent.TimeUnit;
@@ -31,14 +33,27 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private OkHttpClient client;
     private PolylineOptions line = null;
     private GoogleMap map = null;
+    private Marker deviceLocation = null;
 
     private BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             Location currentLocation = intent.getParcelableExtra(LocationService.KEY_LOCATION);
-            Log.i("INTENT", "Received");
+            updateDeviceLocation(currentLocation);
+            Log.i("SERVICE", "LOcation updated");
         }
     };
+
+    private void updateDeviceLocation(Location location) {
+        if (map == null) {
+            return;
+        }
+        if (deviceLocation != null) {
+            deviceLocation.remove();
+        }
+        deviceLocation = map.addMarker(new MarkerOptions().position(new LatLng(location.getLatitude(), location.getLongitude())).title("You"));
+        deviceLocation.showInfoWindow();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +68,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     protected void onResume() {
         super.onResume();
         client = new OkHttpClient.Builder()
-                .readTimeout(0,  TimeUnit.MILLISECONDS)
+                .readTimeout(0, TimeUnit.MILLISECONDS)
                 .build();
 
         Request request = new Request.Builder()

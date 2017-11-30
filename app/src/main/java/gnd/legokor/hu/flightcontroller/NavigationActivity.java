@@ -1,5 +1,6 @@
 package gnd.legokor.hu.flightcontroller;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -39,20 +40,18 @@ public class NavigationActivity extends AppCompatActivity
         }
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
+        if (id == R.id.nav_antenna) {
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+            startActivity(intent);
+        } else if (id == R.id.nav_map) {
+            Intent intent = new Intent(this, MapActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+            startActivity(intent);
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

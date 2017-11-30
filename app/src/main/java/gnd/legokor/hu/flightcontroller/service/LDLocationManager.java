@@ -15,7 +15,7 @@ class LDLocationManager  {
     }
 
     void startLocationMonitoring() {
-        locMan.requestLocationUpdates(LocationManager.GPS_PROVIDER,100, 100, listener);
+        locMan.requestLocationUpdates(LocationManager.GPS_PROVIDER,100, 0, listener);
     }
 
     void stopLocationMonitoring() {

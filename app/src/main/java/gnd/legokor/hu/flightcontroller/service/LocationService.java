@@ -36,6 +36,7 @@ public class LocationService extends Service implements LocationListener {
 
     @Override
     public void onDestroy() {
+        Log.i("SERVICE", "destroy");
         if (ldLocationManager != null) {
             ldLocationManager.stopLocationMonitoring();
         }
@@ -52,11 +53,17 @@ public class LocationService extends Service implements LocationListener {
     }
 
     @Override
-    public void onStatusChanged(String s, int i, Bundle bundle) {}
+    public void onStatusChanged(String s, int i, Bundle bundle) {
+        Log.i("STATUS", s);
+    }
 
     @Override
-    public void onProviderEnabled(String s) {}
+    public void onProviderEnabled(String s) {
+        Log.i("ENABLED", s);
+    }
 
     @Override
-    public void onProviderDisabled(String s) {}
+    public void onProviderDisabled(String s) {
+        Log.i("DISABLED", s);
+    }
 }
