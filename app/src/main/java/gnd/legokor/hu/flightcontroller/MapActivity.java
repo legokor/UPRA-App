@@ -1,7 +1,13 @@
 package gnd.legokor.hu.flightcontroller;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
+import android.location.Location;
 import android.os.Bundle;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
@@ -16,14 +22,23 @@ import java.util.concurrent.TimeUnit;
 
 import gnd.legokor.hu.flightcontroller.http.CoordinatesListener;
 import gnd.legokor.hu.flightcontroller.model.Coordinates;
+import gnd.legokor.hu.flightcontroller.service.SensorService;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 
-public class MapActivity extends AppCompatActivity implements OnMapReadyCallback, CoordinateReceiver {
+public class MapActivity extends AppCompatActivity implements OnMapReadyCallback, CoordinatesReceiver {
 
     private OkHttpClient client;
     private PolylineOptions line = null;
     private GoogleMap map = null;
+
+    private BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Location currentLocation = intent.getParcelableExtra(SensorService.KEY_LOCATION);
+            Log.i("INTENT", "Received");
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,10 +61,19 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 .build();
 
         client.newWebSocket(request, new CoordinatesListener(this));
+
+        Intent i = new Intent(getApplicationContext(), SensorService.class);
+        startService(i);
+
+        LocalBroadcastManager.getInstance(this).registerReceiver(
+                mMessageReceiver,
+                new IntentFilter(SensorService.BR_NEW_LOCATION));
     }
 
     @Override
     protected void onPause() {
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(
+                mMessageReceiver);
         super.onPause();
         client.dispatcher().executorService().shutdown();
     }

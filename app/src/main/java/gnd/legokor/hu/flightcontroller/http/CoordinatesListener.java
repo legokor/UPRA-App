@@ -1,20 +1,19 @@
 package gnd.legokor.hu.flightcontroller.http;
 
 import android.support.annotation.Nullable;
-import android.util.Log;
 
 import com.google.gson.Gson;
 
-import gnd.legokor.hu.flightcontroller.CoordinateReceiver;
+import gnd.legokor.hu.flightcontroller.CoordinatesReceiver;
 import gnd.legokor.hu.flightcontroller.model.Coordinates;
 import okhttp3.Response;
 import okhttp3.WebSocketListener;
 
 public class CoordinatesListener extends WebSocketListener {
 
-    private CoordinateReceiver receiver;
+    private CoordinatesReceiver receiver;
 
-    public CoordinatesListener(CoordinateReceiver r) {
+    public CoordinatesListener(CoordinatesReceiver r) {
         receiver = r;
     }
 
@@ -22,7 +21,6 @@ public class CoordinatesListener extends WebSocketListener {
     public void onMessage(okhttp3.WebSocket webSocket, String text) {
         super.onMessage(webSocket, text);
         Coordinates coordinates = new Gson().fromJson(text, Coordinates.class);
-        Log.i("WS", "MSG: " + text);
         receiver.receiveCoordinates(coordinates);
     }
 
