@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Flight Controller</string>
+    <string name="not_available">Not available</string>
+    <string name="readings_title">Readings</string>
+    <string name="title_activity_navigation">NavigationActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
 </resources>

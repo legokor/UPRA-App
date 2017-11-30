@@ -22,7 +22,7 @@ import java.util.concurrent.TimeUnit;
 
 import gnd.legokor.hu.flightcontroller.http.CoordinatesListener;
 import gnd.legokor.hu.flightcontroller.model.Coordinates;
-import gnd.legokor.hu.flightcontroller.service.SensorService;
+import gnd.legokor.hu.flightcontroller.service.LocationService;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 
@@ -35,7 +35,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            Location currentLocation = intent.getParcelableExtra(SensorService.KEY_LOCATION);
+            Location currentLocation = intent.getParcelableExtra(LocationService.KEY_LOCATION);
             Log.i("INTENT", "Received");
         }
     };
@@ -62,18 +62,17 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
         client.newWebSocket(request, new CoordinatesListener(this));
 
-        Intent i = new Intent(getApplicationContext(), SensorService.class);
+        Intent i = new Intent(getApplicationContext(), LocationService.class);
         startService(i);
 
         LocalBroadcastManager.getInstance(this).registerReceiver(
                 mMessageReceiver,
-                new IntentFilter(SensorService.BR_NEW_LOCATION));
+                new IntentFilter(LocationService.BR_NEW_LOCATION));
     }
 
     @Override
     protected void onPause() {
-        LocalBroadcastManager.getInstance(this).unregisterReceiver(
-                mMessageReceiver);
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(mMessageReceiver);
         super.onPause();
         client.dispatcher().executorService().shutdown();
     }
