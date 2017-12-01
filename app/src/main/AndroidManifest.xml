@@ -28,7 +28,16 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".MapActivity" android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".MapActivity" android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
+
+        <activity android:name=".SettingsActivity">
+            <intent-filter>
+                <action android:name=".Preferences" />
+                <category android:name="android.intent.category.PREFERENCE" />
+            </intent-filter>
+        </activity>
 
         <service
             android:name=".service.LocationService"

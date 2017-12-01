@@ -4,9 +4,11 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.location.Location;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.NavigationView;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.GravityCompat;
@@ -89,8 +91,10 @@ public class MapActivity extends AppCompatActivity implements NavigationView.OnN
                 .readTimeout(0, TimeUnit.MILLISECONDS)
                 .build();
 
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+
         Request request = new Request.Builder()
-                .url("ws://10.0.2.2:8000")
+                .url(preferences.getString("server_url", ""))
                 .build();
 
         client.newWebSocket(request, new CoordinatesListener(this));

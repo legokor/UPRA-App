@@ -158,6 +158,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Intent intent = new Intent(this, MapActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
             startActivity(intent);
+        } else if (id == R.id.nav_settings) {
+            Intent intentSettings = new Intent(MainActivity.this, SettingsActivity.class);
+            intentSettings.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT,
+                    SettingsActivity.FragmentSettingsBasic.class.getName());
+            intentSettings.putExtra(SettingsActivity.EXTRA_NO_HEADERS, true);
+            intentSettings.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+            startActivity(intentSettings);
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
