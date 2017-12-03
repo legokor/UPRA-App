@@ -12,7 +12,6 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
 
     public static final String EXTRA_NO_HEADERS = ":android:no_headers";
     public static final String EXTRA_SHOW_FRAGMENT = ":android:show_fragment";
-    public static final String KEY_START_SERVICE = "start_service";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,12 +39,7 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
     }
 
     @Override
-    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        if (KEY_START_SERVICE.equals(key)) {
-            boolean startService = sharedPreferences.getBoolean(KEY_START_SERVICE, false);
-            // TODO: Service indítása/leállítása
-        }
-    }
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {}
 
     @Override
     public void onBuildHeaders(List<Header> target) {
