@@ -1,15 +1,8 @@
 package gnd.legokor.hu.flightcontroller;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.location.Location;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -22,31 +15,15 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 
-import java.util.concurrent.TimeUnit;
-
-import gnd.legokor.hu.flightcontroller.http.CoordinatesListener;
 import gnd.legokor.hu.flightcontroller.model.Coordinates;
-import gnd.legokor.hu.flightcontroller.service.LocationService;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
 
-public class MapActivity extends BaseActivity implements OnMapReadyCallback, CoordinatesReceiver {
+public class MapActivity extends BaseActivity implements OnMapReadyCallback {
 
-    private OkHttpClient client;
     private PolylineOptions line = null;
     private GoogleMap map = null;
     private Marker deviceLocation = null;
 
-    private BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            Location currentLocation = intent.getParcelableExtra(LocationService.KEY_LOCATION);
-            updateDeviceLocation(currentLocation);
-            Log.i("SERVICE", "LOcation updated");
-        }
-    };
-
-    private void updateDeviceLocation(Location location) {
+    protected void receiveDeviceCoordinates(Location location) {
         if (map == null) {
             return;
         }
@@ -68,36 +45,6 @@ public class MapActivity extends BaseActivity implements OnMapReadyCallback, Coo
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        client = new OkHttpClient.Builder()
-                .readTimeout(0, TimeUnit.MILLISECONDS)
-                .build();
-
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-
-        Request request = new Request.Builder()
-                .url(preferences.getString("server_url", ""))
-                .build();
-
-        client.newWebSocket(request, new CoordinatesListener(this));
-
-        Intent i = new Intent(getApplicationContext(), LocationService.class);
-        startService(i);
-
-        LocalBroadcastManager.getInstance(this).registerReceiver(
-                mMessageReceiver,
-                new IntentFilter(LocationService.BR_NEW_LOCATION));
-    }
-
-    @Override
-    protected void onPause() {
-        LocalBroadcastManager.getInstance(this).unregisterReceiver(mMessageReceiver);
-        super.onPause();
-        client.dispatcher().executorService().shutdown();
-    }
-
-    @Override
     public void onMapReady(GoogleMap googleMap) {
         map = googleMap;
         map.setMapType(GoogleMap.MAP_TYPE_HYBRID);
@@ -107,7 +54,7 @@ public class MapActivity extends BaseActivity implements OnMapReadyCallback, Coo
     }
 
     @Override
-    public void receiveCoordinates(final Coordinates coordinates) {
+    public void receiveUavCoordinates(final Coordinates coordinates) {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {

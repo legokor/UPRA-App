@@ -21,7 +21,7 @@ public class CoordinatesListener extends WebSocketListener {
     public void onMessage(okhttp3.WebSocket webSocket, String text) {
         super.onMessage(webSocket, text);
         Coordinates coordinates = new Gson().fromJson(text, Coordinates.class);
-        receiver.receiveCoordinates(coordinates);
+        receiver.receiveUavCoordinates(coordinates);
     }
 
     @Override
