@@ -1,256 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_sensor"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="gnd.legokor.hu.flightcontroller.MainActivity"
-    android:orientation="vertical"
-    android:gravity="center_horizontal">
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start">
 
-    <LinearLayout
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingBottom="@dimen/activity_vertical_margin"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin"
-        android:gravity="center_horizontal">
+        android:layout_height="match_parent"
+        tools:context="gnd.legokor.hu.flightcontroller.MainActivity"
+        android:orientation="vertical">
 
-        <TextView
-            android:text="@string/readings_title"
-            style="@style/heading"/>
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/AppTheme.AppBarOverlay">
 
-        <LinearLayout style="@style/separatorLayout">
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                app:popupTheme="@style/AppTheme.PopupOverlay" />
 
-            <LinearLayout style="@style/detailsLayout">
+        </android.support.design.widget.AppBarLayout>
 
-                <TextView
-                    android:text="Azimuth"
-                    android:id="@+id/azimuthLabel"
-                    style="@style/subheading"/>
-
-                <TextView
-                    style="@style/detailHeading"
-                    android:text="Current"/>
-
-                <TextView
-                    style="@style/detailTextPrimary"
-                    android:id="@+id/currentAzimuth"
-                    android:text="@string/not_available"/>
-
-                <TextView
-                    style="@style/detailHeading"
-                    android:text="Difference"/>
-
-                <TextView
-                    style="@style/detailTextPrimary"
-                    android:id="@+id/azimuthDifference"
-                    android:text="@string/not_available"/>
-
-                <TextView
-                    style="@style/detailHeading"
-                    android:text="Desired"/>
-
-                <TextView
-                    style="@style/detailText"
-                    android:id="@+id/desiredAzimuth"
-                    android:text="@string/not_available"/>
-
-            </LinearLayout>
-
-            <LinearLayout style="@style/detailsLayout">
-
-                <TextView
-                    android:text="Elevation"
-                    android:id="@+id/elevationLabel"
-                    style="@style/subheading"/>
-
-                <TextView
-                    style="@style/detailHeading"
-                    android:text="Current"/>
-
-                <TextView
-                    style="@style/detailTextPrimary"
-                    android:id="@+id/currentElevation"
-                    android:text="@string/not_available"/>
-
-                <TextView
-                    style="@style/detailHeading"
-                    android:text="Difference"/>
-
-                <TextView
-                    style="@style/detailTextPrimary"
-                    android:id="@+id/elevationDifference"
-                    android:text="@string/not_available"/>
-
-                <TextView
-                    style="@style/detailHeading"
-                    android:text="Desired"/>
-
-                <TextView
-                    style="@style/detailText"
-                    android:id="@+id/desiredElevation"
-                    android:text="@string/not_available"/>
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <View style="@style/divider"/>
-
-        <TextView
-            android:text="Coordinates"
-            style="@style/heading"/>
-
-        <LinearLayout style="@style/separatorLayout">
-
-            <LinearLayout style="@style/detailsLayout">
-
-                <TextView
-                    android:text="This device"
-                    style="@style/subheading"/>
-
-                <TextView
-                    style="@style/detailHeading"
-                    android:text="Latitude"/>
-
-                <TextView
-                    style="@style/detailText"
-                    android:id="@+id/deviceLatitude"
-                    android:text="@string/not_available"/>
-
-                <TextView
-                    style="@style/detailHeading"
-                    android:text="Longitude"/>
-
-                <TextView
-                    style="@style/detailText"
-                    android:id="@+id/deviceLongitude"
-                    android:text="@string/not_available"/>
-
-                <TextView
-                    style="@style/detailHeading"
-                    android:text="Altitude"/>
-
-                <TextView
-                    style="@style/detailText"
-                    android:id="@+id/deviceAltitude"
-                    android:text="@string/not_available"/>
-
-                <TextView
-                    style="@style/detailHeading"
-                    android:text="Last updated"/>
-
-                <TextView
-                    style="@style/detailText"
-                    android:id="@+id/deviceLocationUpdated"
-                    android:text="Never"/>
-
-            </LinearLayout>
-
-            <LinearLayout style="@style/detailsLayout">
-
-                <TextView
-                    android:text="Balloon"
-                    style="@style/subheading"/>
-
-                <TextView
-                    style="@style/detailHeading"
-                    android:text="Latitude"/>
-
-                <TextView
-                    style="@style/detailText"
-                    android:id="@+id/balloonLatitude"
-                    android:text="@string/not_available"/>
-
-                <TextView
-                    style="@style/detailHeading"
-                    android:text="Longitude"/>
-
-                <TextView
-                    style="@style/detailText"
-                    android:id="@+id/balloonLongitude"
-                    android:text="@string/not_available"/>
-
-                <TextView
-                    style="@style/detailHeading"
-                    android:text="Altitude"/>
-
-                <TextView
-                    style="@style/detailText"
-                    android:id="@+id/balloonAltitude"
-                    android:text="@string/not_available"/>
-
-                <TextView
-                    style="@style/detailHeading"
-                    android:text="Last updated"/>
-
-                <TextView
-                    style="@style/detailText"
-                    android:id="@+id/balloonLocationUpdated"
-                    android:text="Never"/>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        style="@style/detailHeading"
-                        android:layout_marginRight="5dp"
-                        android:layout_width="wrap_content"
-                        android:text="Updating"/>
-
-                    <Switch
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/updateSwitch"/>
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <View style="@style/divider"/>
-
-        <TextView
-            android:text="Sensor state"
-            style="@style/heading"/>
-
-        <LinearLayout style="@style/separatorLayout">
-
-            <LinearLayout style="@style/detailsLayout">
-
-                <TextView
-                    android:text="Accelerometer"
-                    style="@style/subheading"/>
-
-                <TextView
-                    style="@style/detailText"
-                    android:id="@+id/accelerometerState"
-                    android:text="@string/not_available"/>
-
-            </LinearLayout>
-
-            <LinearLayout style="@style/detailsLayout">
-
-                <TextView
-                    android:text="Magnetometer"
-                    style="@style/subheading"/>
-
-                <TextView
-                    style="@style/detailText"
-                    android:id="@+id/magnetometerState"
-                    android:text="@string/not_available"/>
-
-            </LinearLayout>
-
-        </LinearLayout>
+        <include layout="@layout/fragment_main" />
 
     </LinearLayout>
 
-</ScrollView>
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:menu="@menu/activity_navigation_drawer" />
+
+</android.support.v4.widget.DrawerLayout>

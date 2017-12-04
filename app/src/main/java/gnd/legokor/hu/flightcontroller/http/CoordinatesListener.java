@@ -28,5 +28,6 @@ public class CoordinatesListener extends WebSocketListener {
     public void onFailure(okhttp3.WebSocket webSocket, Throwable t, @Nullable Response response) {
         super.onFailure(webSocket, t, response);
         t.printStackTrace();
+        receiver.onConnectionFailure();
     }
 }
