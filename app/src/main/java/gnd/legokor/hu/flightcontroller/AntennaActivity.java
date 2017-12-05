@@ -114,7 +114,7 @@ public class AntennaActivity extends BaseActivity {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                Toast.makeText(AntennaActivity.this, "Failed to connect to the server", Toast.LENGTH_LONG).show();
+                Toast.makeText(AntennaActivity.this, R.string.connectionFailed, Toast.LENGTH_LONG).show();
             }
         });
     }

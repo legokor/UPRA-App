@@ -3,7 +3,6 @@ package gnd.legokor.hu.flightcontroller;
 import android.graphics.Color;
 import android.location.Location;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -30,7 +29,7 @@ public class MapActivity extends BaseActivity implements OnMapReadyCallback {
         if (deviceLocation != null) {
             deviceLocation.remove();
         }
-        deviceLocation = map.addMarker(new MarkerOptions().position(new LatLng(location.getLatitude(), location.getLongitude())).title("You"));
+        deviceLocation = map.addMarker(new MarkerOptions().position(new LatLng(location.getLatitude(), location.getLongitude())).title(getString(R.string.you)));
         deviceLocation.showInfoWindow();
     }
 
@@ -58,9 +57,7 @@ public class MapActivity extends BaseActivity implements OnMapReadyCallback {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                Log.i("COORD", coordinates.toString());
                 LatLng latLng = new LatLng(coordinates.lat, coordinates.lng);
-                // TODO: remove previous line
                 line = line.add(latLng);
                 map.addPolyline(line);
                 map.moveCamera(CameraUpdateFactory.newLatLng(latLng));
@@ -73,7 +70,7 @@ public class MapActivity extends BaseActivity implements OnMapReadyCallback {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                Toast.makeText(MapActivity.this, "Failed to connect to the server", Toast.LENGTH_LONG).show();
+                Toast.makeText(MapActivity.this, R.string.connectionFailed, Toast.LENGTH_LONG).show();
             }
         });
     }

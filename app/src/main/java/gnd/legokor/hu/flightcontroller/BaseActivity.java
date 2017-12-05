@@ -67,9 +67,9 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
                     .build();
             client.newWebSocket(request, new CoordinatesListener(this));
         } catch (IllegalArgumentException e) {
-            Toast.makeText(this, "The server URL seems to be malformed", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, R.string.malformedUrl, Toast.LENGTH_LONG).show();
         }
-        
+
         Intent i = new Intent(getApplicationContext(), LocationService.class);
         startService(i);
 

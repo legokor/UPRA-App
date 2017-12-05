@@ -31,14 +31,12 @@ public class LocationService extends Service implements LocationListener {
             locMan = (LocationManager) getApplicationContext().getSystemService(Context.LOCATION_SERVICE);
             locMan.requestLocationUpdates(LocationManager.GPS_PROVIDER,100, 0, this);
         }
-        Log.i("SERVICE", "Location service started");
 
         return START_STICKY;
     }
 
     @Override
     public void onDestroy() {
-        Log.i("SERVICE", "destroy");
         if (locMan != null) {
             locMan.removeUpdates(this);
         }
@@ -48,7 +46,6 @@ public class LocationService extends Service implements LocationListener {
 
     @Override
     public void onLocationChanged(Location location) {
-        Log.i("SERVICE", "Location changed");
         Intent intent = new Intent(BR_NEW_LOCATION);
         intent.putExtra(KEY_LOCATION, location);
         LocalBroadcastManager.getInstance(this).sendBroadcast(intent);

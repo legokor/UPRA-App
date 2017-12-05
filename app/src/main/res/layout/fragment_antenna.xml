@@ -28,13 +28,13 @@
             <LinearLayout style="@style/detailsLayout">
 
                 <TextView
-                    android:text="Azimuth"
+                    android:text="@string/azimuth"
                     android:id="@+id/azimuthLabel"
                     style="@style/subheading"/>
 
                 <TextView
                     style="@style/detailHeading"
-                    android:text="Current"/>
+                    android:text="@string/current"/>
 
                 <TextView
                     style="@style/detailTextPrimary"
@@ -43,7 +43,7 @@
 
                 <TextView
                     style="@style/detailHeading"
-                    android:text="Difference"/>
+                    android:text="@string/difference"/>
 
                 <TextView
                     style="@style/detailTextPrimary"
@@ -52,7 +52,7 @@
 
                 <TextView
                     style="@style/detailHeading"
-                    android:text="Desired"/>
+                    android:text="@string/desired"/>
 
                 <TextView
                     style="@style/detailText"
@@ -64,13 +64,13 @@
             <LinearLayout style="@style/detailsLayout">
 
                 <TextView
-                    android:text="Elevation"
+                    android:text="@string/elevation"
                     android:id="@+id/elevationLabel"
                     style="@style/subheading"/>
 
                 <TextView
                     style="@style/detailHeading"
-                    android:text="Current"/>
+                    android:text="@string/current"/>
 
                 <TextView
                     style="@style/detailTextPrimary"
@@ -79,7 +79,7 @@
 
                 <TextView
                     style="@style/detailHeading"
-                    android:text="Difference"/>
+                    android:text="@string/difference"/>
 
                 <TextView
                     style="@style/detailTextPrimary"
@@ -88,7 +88,7 @@
 
                 <TextView
                     style="@style/detailHeading"
-                    android:text="Desired"/>
+                    android:text="@string/desired"/>
 
                 <TextView
                     style="@style/detailText"
@@ -102,7 +102,7 @@
         <View style="@style/divider"/>
 
         <TextView
-            android:text="Coordinates"
+            android:text="@string/coordinates"
             style="@style/heading"/>
 
         <LinearLayout style="@style/separatorLayout">
@@ -110,12 +110,12 @@
             <LinearLayout style="@style/detailsLayout">
 
                 <TextView
-                    android:text="You"
+                    android:text="@string/you"
                     style="@style/subheading"/>
 
                 <TextView
                     style="@style/detailHeading"
-                    android:text="Latitude"/>
+                    android:text="@string/latitude"/>
 
                 <TextView
                     style="@style/detailText"
@@ -124,7 +124,7 @@
 
                 <TextView
                     style="@style/detailHeading"
-                    android:text="Longitude"/>
+                    android:text="@string/longitude"/>
 
                 <TextView
                     style="@style/detailText"
@@ -133,7 +133,7 @@
 
                 <TextView
                     style="@style/detailHeading"
-                    android:text="Altitude"/>
+                    android:text="@string/altitude"/>
 
                 <TextView
                     style="@style/detailText"
@@ -142,24 +142,24 @@
 
                 <TextView
                     style="@style/detailHeading"
-                    android:text="Last updated"/>
+                    android:text="@string/last_updated"/>
 
                 <TextView
                     style="@style/detailText"
                     android:id="@+id/deviceLocationUpdated"
-                    android:text="Never"/>
+                    android:text="@string/never"/>
 
             </LinearLayout>
 
             <LinearLayout style="@style/detailsLayout">
 
                 <TextView
-                    android:text="UAV"
+                    android:text="@string/uav"
                     style="@style/subheading"/>
 
                 <TextView
                     style="@style/detailHeading"
-                    android:text="Latitude"/>
+                    android:text="@string/latitude"/>
 
                 <TextView
                     style="@style/detailText"
@@ -168,7 +168,7 @@
 
                 <TextView
                     style="@style/detailHeading"
-                    android:text="Longitude"/>
+                    android:text="@string/longitude"/>
 
                 <TextView
                     style="@style/detailText"
@@ -177,7 +177,7 @@
 
                 <TextView
                     style="@style/detailHeading"
-                    android:text="Altitude"/>
+                    android:text="@string/altitude"/>
 
                 <TextView
                     style="@style/detailText"
@@ -186,12 +186,12 @@
 
                 <TextView
                     style="@style/detailHeading"
-                    android:text="Last updated"/>
+                    android:text="@string/altitude"/>
 
                 <TextView
                     style="@style/detailText"
                     android:id="@+id/balloonLocationUpdated"
-                    android:text="Never"/>
+                    android:text="@string/never"/>
 
             </LinearLayout>
 
@@ -200,7 +200,7 @@
         <View style="@style/divider"/>
 
         <TextView
-            android:text="Sensor state"
+            android:text="@string/sensor_state"
             style="@style/heading"/>
 
         <LinearLayout style="@style/separatorLayout">
@@ -208,7 +208,7 @@
             <LinearLayout style="@style/detailsLayout">
 
                 <TextView
-                    android:text="Accelerometer"
+                    android:text="@string/accelerometer"
                     style="@style/subheading"/>
 
                 <TextView
@@ -221,7 +221,7 @@
             <LinearLayout style="@style/detailsLayout">
 
                 <TextView
-                    android:text="Magnetometer"
+                    android:text="@string/magnetometer"
                     style="@style/subheading"/>
 
                 <TextView
