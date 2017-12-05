@@ -17,6 +17,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import java.util.concurrent.TimeUnit;
 
@@ -60,12 +61,15 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
 
-        Request request = new Request.Builder()
-                .url(preferences.getString("server_url", ""))
-                .build();
-
-        client.newWebSocket(request, new CoordinatesListener(this));
-
+        try {
+            Request request = new Request.Builder()
+                    .url(preferences.getString("server_url", ""))
+                    .build();
+            client.newWebSocket(request, new CoordinatesListener(this));
+        } catch (IllegalArgumentException e) {
+            Toast.makeText(this, "The server URL seems to be malformed", Toast.LENGTH_LONG).show();
+        }
+        
         Intent i = new Intent(getApplicationContext(), LocationService.class);
         startService(i);
 
@@ -113,7 +117,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
         int id = item.getItemId();
 
         if (id == R.id.nav_antenna) {
-            Intent intent = new Intent(this, MainActivity.class);
+            Intent intent = new Intent(this, AntennaActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
             startActivity(intent);
         } else if (id == R.id.nav_map) {

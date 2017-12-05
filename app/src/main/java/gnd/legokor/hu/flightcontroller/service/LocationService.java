@@ -1,9 +1,11 @@
 package gnd.legokor.hu.flightcontroller.service;
 
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v4.content.LocalBroadcastManager;
@@ -14,7 +16,7 @@ public class LocationService extends Service implements LocationListener {
     public static final String BR_NEW_LOCATION = "BR_NEW_LOCATION";
     public static final String KEY_LOCATION = "KEY_LOCATION";
 
-    private LDLocationManager ldLocationManager = null;
+    private LocationManager locMan;
     private boolean locationMonitorRunning = false;
 
     @Override
@@ -26,8 +28,8 @@ public class LocationService extends Service implements LocationListener {
     public int onStartCommand(Intent intent, int flags, int startId) {
         if (!locationMonitorRunning) {
             locationMonitorRunning = true;
-            ldLocationManager = new LDLocationManager(getApplicationContext(), this);
-            ldLocationManager.startLocationMonitoring();
+            locMan = (LocationManager) getApplicationContext().getSystemService(Context.LOCATION_SERVICE);
+            locMan.requestLocationUpdates(LocationManager.GPS_PROVIDER,100, 0, this);
         }
         Log.i("SERVICE", "Location service started");
 
@@ -37,8 +39,8 @@ public class LocationService extends Service implements LocationListener {
     @Override
     public void onDestroy() {
         Log.i("SERVICE", "destroy");
-        if (ldLocationManager != null) {
-            ldLocationManager.stopLocationMonitoring();
+        if (locMan != null) {
+            locMan.removeUpdates(this);
         }
 
         super.onDestroy();

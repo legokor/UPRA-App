@@ -4,8 +4,8 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Direction implements Parcelable {
-    public int azimuth;
-    public int elevation;
+    public int azimuth = 0;
+    public int elevation = 0;
 
     @Override
     public int describeContents() {

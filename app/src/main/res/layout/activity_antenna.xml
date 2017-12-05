@@ -13,7 +13,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="gnd.legokor.hu.flightcontroller.MainActivity"
+        tools:context="gnd.legokor.hu.flightcontroller.AntennaActivity"
         android:orientation="vertical">
 
         <android.support.design.widget.AppBarLayout
@@ -30,7 +30,7 @@
 
         </android.support.design.widget.AppBarLayout>
 
-        <include layout="@layout/fragment_main" />
+        <include layout="@layout/fragment_antenna" />
 
     </LinearLayout>
 
