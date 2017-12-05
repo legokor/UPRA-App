@@ -11,7 +11,7 @@ import okhttp3.WebSocketListener;
 
 public class CoordinatesListener extends WebSocketListener {
 
-    private CoordinatesReceiver receiver;
+    private final CoordinatesReceiver receiver;
 
     public CoordinatesListener(CoordinatesReceiver r) {
         receiver = r;

@@ -14,11 +14,6 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
     public static final String EXTRA_SHOW_FRAGMENT = ":android:show_fragment";
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
     protected void onStart() {
         super.onStart();
         PreferenceManager.getDefaultSharedPreferences(

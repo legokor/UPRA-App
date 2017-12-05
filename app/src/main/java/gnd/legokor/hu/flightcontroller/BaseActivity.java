@@ -32,7 +32,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
     private int layout;
     private OkHttpClient client;
 
-    public void setLayout(int l) {
+    void setLayout(int l) {
         layout = l;
     }
 

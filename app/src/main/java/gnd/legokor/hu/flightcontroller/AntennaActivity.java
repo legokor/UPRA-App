@@ -24,16 +24,16 @@ import static java.lang.Math.abs;
 
 public class AntennaActivity extends BaseActivity {
 
-    Direction desiredDirection = new Direction();
+    private Direction desiredDirection = new Direction();
 
-    private BroadcastReceiver sensorReceiver = new BroadcastReceiver() {
+    private final BroadcastReceiver sensorReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             Direction currentDirection = intent.getParcelableExtra(SensorService.KEY_SENSOR);
             updateDeviceDirection(currentDirection);
         }
     };
-    private BroadcastReceiver stateReceiver = new BroadcastReceiver() {
+    private final BroadcastReceiver stateReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             String magnetoAccuracy = intent.getStringExtra(SensorService.KEY_MAGNETOMETER);

@@ -42,7 +42,8 @@
         <service
             android:name=".service.LocationService"
             android:enabled="true"
-            android:exported="true" />
+            android:exported="true"
+            android:permission="" />
         <service
             android:name=".service.SensorService"
             android:enabled="true"

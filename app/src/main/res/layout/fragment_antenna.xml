@@ -2,7 +2,6 @@
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_sensor"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="gnd.legokor.hu.flightcontroller.AntennaActivity"
@@ -29,7 +28,6 @@
 
                 <TextView
                     android:text="@string/azimuth"
-                    android:id="@+id/azimuthLabel"
                     style="@style/subheading"/>
 
                 <TextView
@@ -65,7 +63,6 @@
 
                 <TextView
                     android:text="@string/elevation"
-                    android:id="@+id/elevationLabel"
                     style="@style/subheading"/>
 
                 <TextView
